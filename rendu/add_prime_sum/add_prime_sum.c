@@ -1,76 +1,71 @@
 #include <unistd.h>
 
-int is_prime(int num)
+int ft_atoi(char    *str)
+{
+    int i = 0;
+    int sum = 0;
+    while(str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+        i++;
+    if(str[i] == '+' || str[i] == '-')
+    {
+        if(str[i] == '-')
+            return(0);
+        i++;
+    }
+    char    *digits = "0123456789";
+    while(str[i])
+    {
+        char c = str[i];
+        int k = 0;
+        while(k < 10 && digits[k] != c)
+            k++;
+        if(k == 10)
+            break;
+        sum = (sum * 10) + k;
+        i++;
+    }
+    return(sum);
+}
+
+int is_prime(int nbr)
 {
     int divider = 2;
-    if (num <= 1)
+    if(nbr < divider)
         return(0);
-    while(divider < num)
+    while(divider < nbr)
     {
-        if(num % divider == 0)
-        {
-            return (0);
-        }
+        if(nbr % divider == 0)
+            return(0);
         divider++;
     }
     return(1);
 }
 
-int ft_atoi(char   *str)
+void    ft_putnbr(int nbr)
 {
-    int i = 0;
-    int negativ = 1;
-    int sum = 0;
-    if(str[i] == '-' || str[i] == '+')
-    {
-        i++;
-        if(str[i] == '-')
-            negativ = -1;
-    }
-    while(str[i] >= '0' && str[i] <= '9')
-    {
-            sum = (sum * 10) + str[i] - '0';
-            i++;
-    }
-    return(sum * negativ);
-}   
-
-void    ft_putnbr(int i)
-{
-    char c;
-    if(i >= 10)
-    {
-        ft_putnbr(i / 10);
-    }
-    c = (i % 10) + '0';
+    if(nbr >= 10)
+        ft_putnbr(nbr / 10);
+    char c = nbr % 10 + '0';    
     write(1,&c,1);
 }
 
 int main(int ac, char   **av)
 {
-    int i = 2;
-    int nbr = 0;
-    int sum = 0;
-    if(ac ==2)
+    if(ac == 2)
     {
-        nbr = ft_atoi(av[1]);
-        if(nbr > 0)
+        int sum = 0;
+        int prime = 2;
+        int nbr = ft_atoi(av[1]);
+        while (prime <= nbr)
         {
-            while(i <= nbr)
-            {
-                if(is_prime(i))
-                    sum += i;
-                i++;
-            }
-            ft_putnbr(sum);
+            if(is_prime(prime))
+                sum += prime;
+            prime++;
         }
-        else
-            write(1,"0",1);
+        ft_putnbr(sum);
+            
     }
     else
-    {
         write(1,"0",1);
-    }
     write(1,"\n",1);
-    return(0);
 }

@@ -1,0 +1,36 @@
+ft_list_remove_if.c:6:6: error: conflicting types for ‘ft_list_remove_if’; have ‘void(t_list **, void *, int (*)(void *, void *))’ {aka ‘void(struct s_list **, void *, int (*)(void *, void *))’}
+    6 | void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(void *, void *))
+      |      ^~~~~~~~~~~~~~~~~
+In file included from ft_list_remove_if.c:2:
+ft_list.h:7:6: note: previous declaration of ‘ft_list_remove_if’ with type ‘void(t_list **, void *, int (*)(void))’ {aka ‘void(struct s_list **, void *, int (*)(void))’}
+    7 | void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)());
+      |      ^~~~~~~~~~~~~~~~~
+main.c: In function ‘main’:
+main.c:46:46: error: passing argument 3 of ‘ft_list_remove_if’ from incompatible pointer type [-Wincompatible-pointer-types]
+   46 |         ft_list_remove_if(begin_list, straa, strcmp);
+      |                                              ^~~~~~
+      |                                              |
+      |                                              int (*)(const char *, const char *)
+In file included from main.c:3:
+ft_list.h:7:67: note: expected ‘int (*)(void)’ but argument is of type ‘int (*)(const char *, const char *)’
+    7 | void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)());
+      |                                                             ~~~~~~^~~~~~
+In file included from main.c:2:
+/usr/include/string.h:156:12: note: ‘strcmp’ declared here
+  156 | extern int strcmp (const char *__s1, const char *__s2)
+      |            ^~~~~~
+main.c: In function ‘main’:
+main.c:46:46: error: passing argument 3 of ‘ft_list_remove_if’ from incompatible pointer type [-Wincompatible-pointer-types]
+   46 |         ft_list_remove_if(begin_list, straa, strcmp);
+      |                                              ^~~~~~
+      |                                              |
+      |                                              int (*)(const char *, const char *)
+In file included from main.c:3:
+ft_list.h:7:67: note: expected ‘int (*)(void)’ but argument is of type ‘int (*)(const char *, const char *)’
+    7 | void ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)());
+      |                                                             ~~~~~~^~~~~~
+In file included from main.c:2:
+/usr/include/string.h:156:12: note: ‘strcmp’ declared here
+  156 | extern int strcmp (const char *__s1, const char *__s2)
+      |            ^~~~~~
+[32m[1mPASSED 🎉(B[0m
